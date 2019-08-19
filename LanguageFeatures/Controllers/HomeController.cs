@@ -25,5 +25,26 @@ namespace LanguageFeatures.Controllers
             return View("Result",
                 (object)string.Format("Product name: {0}", productName));
         }
+
+        public ViewResult CreateProduct()
+        {
+            // create and populate a new Product oblect
+            Product myProduct = new Product()
+            {
+                ProductID = 100,
+                Name = "Kayak",
+                Description = "A boat for one person",
+                Price = 275m,
+                Category = "Watersports"
+            };
+
+            // get the property 
+            string productName = myProduct.Name;
+
+            // generate the view
+            return View("Result",
+                (object)string.Format("Category: {0}", myProduct.Category));
+        }
+
     }
 }
