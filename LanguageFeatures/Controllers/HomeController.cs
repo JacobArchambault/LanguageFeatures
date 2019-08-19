@@ -1,6 +1,6 @@
 ﻿using System;
-using System.Web.Mvc;
 using System.Collections.Generic;
+using System.Web.Mvc;
 
 using LanguageFeatures.Models;
 
@@ -82,6 +82,36 @@ namespace LanguageFeatures.Controllers
 
             return View("Result",
                 (object)String.Format("Total: {0:c}", cartTotal));
+        }
+
+        public ViewResult UseExtensionEnumerable()
+        {
+            IEnumerable<Product> products = new ShoppingCart
+            {
+                Products = new List<Product>
+                {
+                    new Product {Name = "Kayak", Price = 275M},
+                    new Product {Name = "Lifejacket", Price = 48.95M},
+                    new Product {Name = "Soccer ball", Price = 19.50M},
+                    new Product {Name = "Corner flag", Price = 34.95M}
+                }
+            };
+
+            // Create and populate an array of product objects
+            Product[] productArray =
+            {
+                    new Product {Name = "Kayak", Price = 275M},
+                    new Product {Name = "Lifejacket", Price = 48.95M},
+                    new Product {Name = "Soccer ball", Price = 19.50M},
+                    new Product {Name = "Corner flag", Price = 34.95M }
+            };
+
+            // get the total value of the products in the cart
+            decimal cartTotal = products.TotalPrices();
+            decimal arrayTotal = products.TotalPrices();
+
+            return View("Result",
+                (object)String.Format("Cart total: {0}, Array Total: {1}", cartTotal, arrayTotal));
         }
     }
 }
