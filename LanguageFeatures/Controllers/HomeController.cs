@@ -128,10 +128,8 @@ namespace LanguageFeatures.Controllers
                 }
             };
 
-            Func<Product, bool> categoryFilter = prod => prod.Category == "Soccer";
-
             decimal total = 0;
-            foreach (Product prod in products.Filter(categoryFilter))
+            foreach (Product prod in products.Filter(prod => prod.Category == "Soccer"))
             {
                 total += prod.Price;
             }
