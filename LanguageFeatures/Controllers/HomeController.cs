@@ -155,5 +155,36 @@ namespace LanguageFeatures.Controllers
 
             return View("Result", (object)result.ToString());
         }
+
+        public ViewResult FindProducts()
+        {
+            Product[] products = {
+                new Product {Name = "Kayak", Category = "Watersports", Price = 275M},
+                new Product {Name = "Lifejacket", Category = "Watersports", Price = 48.95M},
+                new Product {Name = "Soccer ball", Category = "Soccer", Price = 19.50M},
+                new Product {Name = "Corner flag", Category = "Soccer", Price = 34.95M}
+            };
+
+            // define the array to hold the results
+            Product[] foundProducts = new Product[3];
+
+            // sort the contents of the array
+            Array.Sort(products, (item1, item2) =>
+            {
+                return Comparer<decimal>.Default.Compare(item1.Price, item2.Price);
+            });
+
+            // get the first three items in the array as the results
+            Array.Copy(products, foundProducts, 3);
+
+            // create the result
+            StringBuilder result = new StringBuilder();
+            foreach (Product p in foundProducts)
+            {
+                result.AppendFormat("Price: {0} ", p.Price);
+            }
+
+            return View("Result", (object)result.ToString());
+        }
     }
 }
